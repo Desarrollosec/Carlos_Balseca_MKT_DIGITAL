@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Balseca | Portafolio Neón Animado</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --neon-orange: #ff5500;
+            --dark-card: #111111;
+            --text-main: #e0e0e0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ================= FONDO 3D INTERACTIVO ================= */
+        .bg-3d-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none; /* Para que no interfiera con los clicks */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1200px;
+            filter: blur(10px); /* Desenfocado */
+            opacity: 0.15; /* Transparencia */
+        }
+
+        .bg-cube {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            transform-style: preserve-3d;
+            transform: rotateX(45deg) rotateY(45deg); /* Posición inicial */
+            transition: transform 0.1s linear; /* Suaviza el movimiento al scrollear */
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--neon-orange);
+            background: rgba(255, 85, 0, 0.05);
+            box-shadow: 0 0 40px var(--neon-orange), inset 0 0 40px var(--neon-orange);
+        }
+
+        .face-front  { transform: translateZ(250px); }
+        .face-back   { transform: rotateY(180deg) translateZ(250px); }
+        .face-left   { transform: rotateY(-90deg) translateZ(250px); }
+        .face-right  { transform: rotateY(90deg) translateZ(250px); }
+        .face-top    { transform: rotateX(90deg) translateZ(250px); }
+        .face-bottom { transform: rotateX(-90deg) translateZ(250px); }
+        /* ======================================================== */
+
+        h1, h2, h3, h4 {
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .neon-text {
+            color: #fff;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px var(--neon-orange),
+                0 0 40px var(--neon-orange),
+                0 0 80px var(--neon-orange);
+        }
+
+        .box-3d {
+            background: var(--dark-card);
+            border-radius: 15px;
+            box-shadow: 
+                8px 8px 15px rgba(0,0,0,0.8),
+                -8px -8px 15px rgba(255, 85, 0, 0.1);
+            border: 1px solid rgba(255, 85, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 10px 20px; }
+        header { text-align: center; padding: 40px 20px 20px; position: relative; }
+
+        .hero-title { font-size: 5.5rem; letter-spacing: 3px; line-height: 1; margin-bottom: 5px; margin-top: 10px; white-space: nowrap; }
+        .hero-subtitle { font-size: 2rem; color: var(--neon-orange); letter-spacing: 2px; margin-top: 0; margin-bottom: 40px; white-space: nowrap; }
+
+        .header-visuals { position: relative; width: 100%; max-width: 1000px; height: 400px; margin: 0 auto; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+        
+        .profile-pic-container {
+            width: 250px; height: 250px; border-radius: 50%; padding: 5px;
+            background: linear-gradient(45deg, #000, var(--neon-orange), #000);
+            animation: pulse-border 2s infinite; position: relative; z-index: 10;
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(255, 85, 0, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 85, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 85, 0, 0); }
+        }
+
+        .profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid #000; }
+
+        .floating-skill {
+            position: absolute; background: rgba(0, 0, 0, 0.85); padding: 8px 18px;
+            font-family: 'Teko', sans-serif; font-size: 1.4rem; border-radius: 25px; letter-spacing: 1px;
+            color: #fff; white-space: nowrap; z-index: 1; backdrop-filter: blur(5px);
+            border: 1px solid var(--neon-orange); box-shadow: 0 0 10px rgba(255, 85, 0, 0.5), inset 0 0 5px rgba(255, 85, 0, 0.3);
+        }
+
+        @keyframes floatA { 0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); } 50% { transform: translateY(-15px) translateX(10px) rotate(2deg); } }
+        @keyframes floatB { 0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); } 50% { transform: translateY(20px) translateX(-10px) rotate(-2deg); } }
+        @keyframes floatC { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-10px) scale(1.05); } }
+        @keyframes floatD { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(15px) translateX(15px); } }
+        @keyframes floatE { 0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); } 50% { transform: translateY(-10px) translateX(-15px) rotate(3deg); } }
+        
+        .skill-1 { top: 15%; left: 8%; animation: floatA 6s ease-in-out infinite; }
+        .skill-3 { top: 45%; left: 0%; animation: floatC 5s ease-in-out infinite; z-index: 2; }
+        .skill-5 { bottom: 25%; left: 5%; animation: floatE 8s ease-in-out infinite; }
+        .skill-7 { bottom: 5%; left: 18%; animation: floatB 7.5s ease-in-out infinite; }
+        
+        .skill-8 { top: 10%; right: 15%; animation: floatE 6.2s ease-in-out infinite; }
+        .skill-2 { top: 35%; right: 2%; animation: floatB 7.5s ease-in-out infinite; }
+        .skill-4 { top: 55%; right: 0%; animation: floatD 6.5s ease-in-out infinite; }
+        .skill-6 { bottom: 25%; right: 8%; animation: floatA 7s ease-in-out infinite; }
+        .skill-9 { bottom: 5%; right: 18%; animation: floatD 7.2s ease-in-out infinite; }
+
+        @media(max-width: 768px) {
+            .hero-title { font-size: 3.2rem; }
+            .hero-subtitle { font-size: 1.15rem; margin-bottom: 25px; }
+            .header-visuals { height: 400px; max-width: 100%; }
+            .skill-1 { top: 5%; left: 2%; } .skill-3 { top: 25%; left: -5%; }
+            .skill-5 { bottom: 30%; left: 0%; } .skill-7 { bottom: 10%; left: 10%; }
+            .skill-8 { top: 10%; right: 5%; } .skill-2 { top: 30%; right: -2%; }
+            .skill-4 { top: 50%; right: -5%; } .skill-6 { bottom: 25%; right: 2%; }
+            .skill-9 { bottom: 5%; right: 10%; }
+            
+            /* Ajustar tamaño del cubo en móviles para que no se vea gigante */
+            .bg-cube { width: 300px; height: 300px; }
+            .face-front  { transform: translateZ(150px); }
+            .face-back   { transform: rotateY(180deg) translateZ(150px); }
+            .face-left   { transform: rotateY(-90deg) translateZ(150px); }
+            .face-right  { transform: rotateY(90deg) translateZ(150px); }
+            .face-top    { transform: rotateX(90deg) translateZ(150px); }
+            .face-bottom { transform: rotateX(-90deg) translateZ(150px); }
+        }
+
+        .interactive-section { margin-top: 100px; text-align: center; }
+        .interactive-title { font-size: 4rem; margin-bottom: 5px; line-height: 1; }
+        .interactive-subtitle { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 1.1rem; color: #aaaaaa; margin-top: 0; margin-bottom: 40px; }
+
+        .swiper { width: 100%; padding-top: 20px; padding-bottom: 10px; }
+        .swiper-slide {
+            width: 280px; height: 100px; background: var(--dark-card); border: 2px solid rgba(255, 85, 0, 0.3);
+            border-radius: 20px; display: flex; align-items: center; justify-content: center;
+            font-family: 'Teko', sans-serif; font-size: 1.5rem; color: #fff; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: border-color 0.3s, color 0.3s;
+            text-transform: uppercase; letter-spacing: 1px; text-align: center; padding: 0 10px; box-sizing: border-box; user-select: none;
+        }
+        .swiper-slide-active { border-color: var(--neon-orange); color: var(--neon-orange); box-shadow: 0 0 20px var(--neon-orange), inset 0 0 10px rgba(0,0,0,0.6); }
+
+        .modal-overlay {
+            display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); justify-content: center;
+            align-items: center; padding: 20px; box-sizing: border-box;
+        }
+        .modal-content {
+            background: var(--dark-card); border: 2px solid var(--neon-orange); border-radius: 20px; padding: 40px;
+            width: 100%; max-width: 800px; max-height: 85vh; overflow-y: auto; position: relative;
+            box-shadow: 0 0 30px rgba(255, 85, 0, 0.3), inset 0 0 20px rgba(0,0,0,0.8); text-align: left;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .profile-modal-content { display: flex; align-items: center; gap: 30px; }
+        .profile-modal-text { flex: 1; }
+        .profile-modal-img-container { flex-shrink: 0; width: 250px; }
+        .profile-modal-img { width: 100%; border-radius: 15px; border: 2px solid var(--neon-orange); box-shadow: 0 0 15px rgba(255, 85, 0, 0.5); object-fit: cover; }
+
+        .modal-buttons-container { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 30px; }
+        .modal-link-btn {
+            display: flex; align-items: center; justify-content: center; width: 100%; max-width: 400px;
+            background: #000; border: 2px solid var(--neon-orange); color: #fff; padding: 15px 20px;
+            border-radius: 12px; font-family: 'Teko', sans-serif; font-size: 1.6rem; text-transform: uppercase;
+            text-decoration: none; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(255, 85, 0, 0.2);
+            cursor: pointer;
+        }
+        .modal-link-btn:hover { background: var(--neon-orange); color: #000; box-shadow: 0 0 20px var(--neon-orange); transform: translateY(-3px); }
+
+        .modal-text-center { text-align: center !important; }
+
+        @media (max-width: 768px) {
+            .profile-modal-content { flex-direction: column-reverse; align-items: center; text-align: center; }
+            .profile-modal-img-container { width: 100%; max-width: 300px; margin-top: 20px; }
+            .modal-content h3 { text-align: center; }
+        }
+
+        .modal-content::-webkit-scrollbar { width: 8px; }
+        .modal-content::-webkit-scrollbar-thumb { background: var(--neon-orange); border-radius: 4px; }
+
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        .close-btn { position: absolute; top: 15px; right: 20px; color: var(--neon-orange); font-size: 2.5rem; font-family: 'Teko', sans-serif; cursor: pointer; transition: all 0.3s; line-height: 1; z-index: 10; }
+        .close-btn:hover { color: #fff; text-shadow: 0 0 15px var(--neon-orange); transform: scale(1.1); }
+
+        .modal-content h3 { font-size: 2.5rem; color: var(--neon-orange); margin-bottom: 20px; border-bottom: 1px solid rgba(255, 85, 0, 0.3); padding-bottom: 10px; }
+        .modal-content h4 { font-size: 1.5rem; color: #fff; margin-top: 20px; margin-bottom: 5px; letter-spacing: 1px; }
+        .modal-content p, .modal-content li { font-size: 1rem; line-height: 1.6; margin-bottom: 10px; color: #d0d0d0; }
+        .modal-content ul { padding-left: 20px; margin-top: 5px; }
+
+        .tags-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; margin-bottom: 15px; }
+        .tag-item { background: #000; padding: 4px 12px; font-family: 'Teko', sans-serif; font-size: 1.2rem; border-radius: 5px; border: 1px solid var(--neon-orange); color: var(--text-main); letter-spacing: 1px; }
+
+        .section-title { font-size: 3.5rem; text-align: center; margin-bottom: 40px; margin-top: 0px; }
+
+        .portfolio-section-layout { 
+            display: flex; 
+            align-items: center; 
+            gap: 40px; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+        }
+        
+        .portfolio-carousel-wrapper { 
+            flex: 2; 
+            max-width: 750px; 
+        }
+        
+        .portfolio-buttons-wrapper { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+            min-width: 320px; 
+        }
+
+        .portfolio-carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 15px; }
+        .portfolio-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .portfolio-slide { min-width: 100%; box-sizing: border-box; padding: 10px; }
+
+        .portfolio-slide img, .portfolio-slide video {
+            width: 100%; 
+            height: 550px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            display: block; 
+        }
+
+        .portfolio-btn {
+            position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7);
+            color: var(--neon-orange); border: 2px solid var(--neon-orange); width: 40px; height: 40px;
+            border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 10; display: flex; align-items: center;
+            justify-content: center; transition: all 0.3s ease;
+        }
+
+        .portfolio-btn:hover { background: var(--neon-orange); color: #fff; box-shadow: 0 0 15px var(--neon-orange); }
+        .prev-btn { left: 15px; } .next-btn { right: 15px; }
+
+        .portfolio-action-btn {
+            background: var(--dark-card); border: 2px solid rgba(255, 85, 0, 0.4); color: #fff; padding: 20px;
+            border-radius: 15px; font-family: 'Teko', sans-serif; font-size: 1.8rem; text-transform: uppercase;
+            text-decoration: none; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-align: center; display: flex; align-items: center;
+            justify-content: center; gap: 10px; width: 100%; box-sizing: border-box;
+        }
+
+        .portfolio-action-btn:hover {
+            background: var(--neon-orange); color: #000; border-color: var(--neon-orange);
+            box-shadow: 0 0 20px var(--neon-orange), inset 0 0 10px rgba(0,0,0,0.2); transform: translateY(-3px);
+        }
+        
+        /* Estilos para el input de clave */
+        .password-input {
+            width: 80%; max-width: 300px; padding: 12px; margin-bottom: 20px; font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif; background: #000; color: #fff;
+            border: 1px solid var(--neon-orange); border-radius: 8px; text-align: center;
+            outline: none; transition: box-shadow 0.3s;
+        }
+        .password-input:focus { box-shadow: 0 0 10px rgba(255, 85, 0, 0.5); }
+
+        @media (max-width: 900px) {
+            .portfolio-section-layout { flex-direction: column; }
+            .portfolio-carousel-wrapper { max-width: 100%; }
+            .portfolio-buttons-wrapper { width: 100%; min-width: auto; }
+            
+            .portfolio-slide img, .portfolio-slide video { height: 400px; }
+        }
+
+        .brands-carousel {
+            width: 100%; overflow: hidden; position: relative; padding: 20px 0;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            margin-bottom: 60px;
+        }
+        .brands-track { display: flex; align-items: center; gap: 40px; width: max-content; animation: scrollBrands 20s linear infinite; }
+        .brands-track:hover { animation-play-state: paused; }
+        .brand-logo { height: 70px; object-fit: contain; background: #fff; border-radius: 10px; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        @keyframes scrollBrands { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 20px)); } }
+        .brands-title { white-space: normal; }
+    </style>
+</head>
+<body>
+
+    <!-- FONDO 3D -->
+    <div class="bg-3d-wrapper">
+        <div class="bg-cube" id="bgCube">
+            <div class="cube-face face-front"></div>
+            <div class="cube-face face-back"></div>
+            <div class="cube-face face-left"></div>
+            <div class="cube-face face-right"></div>
+            <div class="cube-face face-top"></div>
+            <div class="cube-face face-bottom"></div>
+        </div>
+    </div>
+
+    <header>
+        <h1 class="hero-title neon-text">Carlos Balseca</h1>
+        <h2 class="hero-subtitle">ESPECIALISTA EN MARKETING DIGITAL</h2>
+
+        <div class="header-visuals">
+            <div class="floating-skill skill-1">Meta Ads & Google Ads</div>
+            <div class="floating-skill skill-3">Power BI</div>
+            <div class="floating-skill skill-5">Premiere & After Effects</div>
+            <div class="floating-skill skill-7">Manejo de Presupuestos</div>
+            <div class="floating-skill skill-8">Gestión de Equipos</div>
+            <div class="floating-skill skill-2">N8n</div>
+            <div class="floating-skill skill-4">IA Meta WhatsApp</div>
+            <div class="floating-skill skill-6">OBS Studio</div>
+            <div class="floating-skill skill-9">HTML/CSS/JS</div>
+
+            <div class="profile-pic-container">
+                <img src="./Imgs/foto_perfil_cv.jpg" alt="Carlos Balseca" class="profile-pic">
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h2 class="interactive-title neon-text">CONOCE MÁS SOBRE MÍ</h2>
+            <p class="interactive-subtitle">(rota las opciones, elige una y revisa)</p>
+
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" onclick="openModal('modal-perfil')">Mi perfil</div>
+                    <div class="swiper-slide" onclick="openModal('modal-habilidades')">Habilidades</div>
+                    <div class="swiper-slide" onclick="openModal('modal-experiencia')">Experiencia</div>
+                    <div class="swiper-slide" onclick="openModal('modal-conocimientos')">Conocimientos y plataformas</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title neon-text">Conoce un poco de mis trabajos</h2>
+        
+        <div class="portfolio-section-layout">
+            
+            <div class="portfolio-carousel-wrapper">
+                <div class="portfolio-carousel-container box-3d">
+                    <button class="portfolio-btn prev-btn" id="prevBtn">&#10094;</button>
+                    
+                    <div class="portfolio-track" id="track">
+                        <div class="portfolio-slide"><img src="./Imgs/carrusel_1.jpg" alt="Trabajo 1"></div>
+                        <div class="portfolio-slide"><video src="./Vids/carrusel_5.mp4" autoplay loop muted playsinline></video></div>
+                        <div class="portfolio-slide"><img src="./Imgs/carrusel_2.jpg" alt="Trabajo 2"></div>
+                        <div class="portfolio-slide"><video src="./Vids/carrusel_6.mp4" autoplay loop muted playsinline></video></div>
+                        <div class="portfolio-slide"><img src="./Imgs/carrusel_3.jpg" alt="Trabajo 3"></div>
+                        <div class="portfolio-slide"><img src="./Imgs/carrusel_4.jpg" alt="Trabajo 4"></div>
+                    </div>
+                    
+                    <button class="portfolio-btn next-btn" id="nextBtn">&#10095;</button>
+                </div>
+            </div>
+
+            <div class="portfolio-buttons-wrapper">
+                <div class="portfolio-action-btn" onclick="openModal('modal-juegos')">🤖 Juegos y desarrollos con IA</div>
+                <a href="https://canva.link/dzi0kqqhcwa9onq" target="_blank" class="portfolio-action-btn">🎬 Contenido Audiovisual</a>
+                
+                <!-- Nuevos Botones -->
+                <div class="portfolio-action-btn" onclick="openPasswordModal()">🔐 Obtener información</div>
+                <a href="./Imgs/CV_Carlos_Balseca.pdf" download="CV_Carlos_Balseca.pdf" class="portfolio-action-btn">📄 Descargar CV</a>
+            </div>
+
+        </div>
+
+        <h2 class="section-title neon-text brands-title">Marcas con las que he colaborado</h2>
+        <div class="brands-carousel">
+            <div class="brands-track">
+                <img src="./Imgs/logo_1-100.jpg" class="brand-logo" alt="Logo 1"> <img src="./Imgs/logo_2-100.jpg" class="brand-logo" alt="Logo 2"> <img src="./Imgs/logo_3-100.jpg" class="brand-logo" alt="Logo 3"> <img src="./Imgs/logo_4-100.jpg" class="brand-logo" alt="Logo 4"> <img src="./Imgs/logo_5-100.jpg" class="brand-logo" alt="Logo 5"> <img src="./Imgs/logo_6-100.jpg" class="brand-logo" alt="Logo 6"> <img src="./Imgs/logo_7-100.jpg" class="brand-logo" alt="Logo 7"> <img src="./Imgs/logo_8-100.jpg" class="brand-logo" alt="Logo 8"> <img src="./Imgs/logo_9-100.jpg" class="brand-logo" alt="Logo 9">
+                <img src="./Imgs/logo_1-100.jpg" class="brand-logo" alt="Logo 1"> <img src="./Imgs/logo_2-100.jpg" class="brand-logo" alt="Logo 2"> <img src="./Imgs/logo_3-100.jpg" class="brand-logo" alt="Logo 3"> <img src="./Imgs/logo_4-100.jpg" class="brand-logo" alt="Logo 4"> <img src="./Imgs/logo_5-100.jpg" class="brand-logo" alt="Logo 5"> <img src="./Imgs/logo_6-100.jpg" class="brand-logo" alt="Logo 6"> <img src="./Imgs/logo_7-100.jpg" class="brand-logo" alt="Logo 7"> <img src="./Imgs/logo_8-100.jpg" class="brand-logo" alt="Logo 8"> <img src="./Imgs/logo_9-100.jpg" class="brand-logo" alt="Logo 9">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-perfil" class="modal-overlay" onclick="closeOutside(event, 'modal-perfil')">
+        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-perfil')">&times;</span>
+            <h3 class="neon-text">🚀 Mi Perfil</h3>
+            <div class="profile-modal-content">
+                <div class="profile-modal-text">
+                    <p>Creo firmemente que el buen marketing debe ser medible y rentable. Como especialista en marketing digital y omnicanal, transformo objetivos de negocio en estrategias 'phygitales' (pauta digital, automatización, IA y activaciones en punto de venta).</p>
+                    <p>Más allá de la ejecución, mi fortaleza radica en el liderazgo de proyectos end-to-end: orquesto equipos de trabajo, gestiono agencias externas y asigno presupuestos con un enfoque estricto en el ROAS y el cumplimiento de metas económicas.</p>
+                    <p>Construyo campañas que conectan con la audiencia y multiplican la inversión. Si su objetivo es integrar creatividad, rentabilidad y liderazgo estratégico, mi perfil y su visión hacen el match perfecto.</p>
+                </div>
+                <div class="profile-modal-img-container"><img src="./Imgs/foto_perfil_popup.jpg" alt="Carlos Balseca Perfil" class="profile-modal-img"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-habilidades" class="modal-overlay" onclick="closeOutside(event, 'modal-habilidades')">
+        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-habilidades')">&times;</span>
+            <h3 class="neon-text">⚡ Habilidades</h3>
+            <h4>🎯 Performance & Estrategia Digital</h4><p>Gestión avanzada de pauta en Meta Ads, Google Ads y TikTok Ads. Diseño de embudos de conversión (funnels), administración de comunidades y comunicación orgánica orientada a resultados.</p>
+            <h4>📊 Data, Analytics & Business Intelligence</h4><p>Dominio de Power BI, Google Analytics, Meta Business Suite y manejo de bases de datos. Construcción de dashboards interactivos y reporterías automatizadas para el monitoreo de KPIs, control de presupuestos y toma de decisiones estratégicas.</p>
+            <h4>⚙️ Automatización & Ecosistemas CRM</h4><p>Implementación de flujos técnicos para gestión de leads, integraciones multiplataforma y desarrollo de chatbots (tradicionales y con IA) para optimizar la atención y el flujo de ventas.</p>
+            <h4>🧠 Inteligencia Artificial Aplicada</h4><p>Implementación de IA en procesos creativos y analíticos, incluyendo análisis predictivo de datos y generación de contenido multimedia (texto, audio y elementos visuales/videojuegos).</p>
+            <h4>🎬 Dirección Creativa & Producción Audiovisual</h4><p>Creación de contenido omnicanal, fotografía de campo y dirección de campañas de video comercial. Dominio avanzado de la Suite Adobe (Photoshop, Illustrator, Premiere, After Effects, Audition), DaVinci Resolve, OBS, Canva y CapCut.</p>
+        </div>
+    </div>
+
+    <div id="modal-experiencia" class="modal-overlay" onclick="closeOutside(event, 'modal-experiencia')">
+        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-experiencia')">&times;</span>
+            <h3 class="neon-text">💼 Experiencia</h3>
+            <h4>📺 ALMACENES MIRNA | Especialista Digital | Junio 2026 – Presente</h4>
+            <ul>
+                <li><strong>Data Analytics & Performance Digital:</strong> Análisis profundo de información comercial y métricas de negocio para la toma de decisiones estratégicas. Gestión integral de pauta digital orientada a la maximización del ROAS, y liderazgo en el desarrollo de aplicativos digitales corporativos que optimizan los procesos internos.</li>
+                <li><strong>Fidelización & Marketing Conversacional (IA):</strong> Desarrollo e implementación de planes de fidelización para potenciar la retención de clientes (Lifetime Value). Integración de Inteligencia Artificial para WhatsApp Business y chatbots predictivos, ejecutando campañas automatizadas de mailing y mensajería masiva para escalar la atención.</li>
+                <li><strong>Dirección Estratégica de Agencias:</strong> Coordinación y supervisión directa de agencias de marketing externas, asegurando el cumplimiento táctico de las campañas, la optimización de recursos y la alineación total con los objetivos comerciales de la marca.</li>
+            </ul>
+            <h4>💊 FARMACORP</h4>
+            <ul>
+                <li><strong>Business Intelligence & Objetivos Comerciales:</strong> Desarrollo de tableros interactivos (Power BI) y automatización de reporterías corporativas para el monitoreo en tiempo real. Asignación de presupuestos, seguimiento de metas de ventas y evaluación estricta del ROI en campañas comerciales.</li>
+                <li><strong>Gestión de Agencias & Proyectos Corporativos:</strong> Liderazgo en campañas de alto impacto, como la dirección del proyecto comercial multiplataforma del personaje animado 3D "Farmy". Coordinación integral con agencias externas para la producción de materiales, asegurando la conversión directa (mecánicas de registro de facturas en puntos de venta).</li>
+                <li><strong>Administración Digital:</strong> Gestión estratégica de redes sociales y supervisión del ecosistema digital de la marca para mantener la coherencia comunicacional corporativa.</li>
+            </ul>
+            <h4>🛒 CRESA</h4>
+            <ul>
+                <li><strong>Dirección Creativa & Producción Multimedia:</strong> Liderazgo en la dirección de arte corporativa. Ejecución técnica avanzada en diseño gráfico, producción y postproducción audiovisual para campañas de alto impacto.</li>
+                <li><strong>Paid Media & Innovación Tecnológica:</strong> Administración eficiente de presupuestos de pauta digital. Implementación pionera de herramientas de Inteligencia Artificial para automatización de procesos internos, análisis predictivo de mercado y desarrollo de chatbots.</li>
+            </ul>
+            <h4>🩺 VERIS - PARA MÍ</h4>
+            <ul>
+                <li><strong>Performance Marketing & Ecosistema Digital:</strong> Gestión estratégica de pauta en Google Ads, Meta Ads y TikTok Ads enfocada en conversión de leads, respaldada por la administración de CRM y ecosistemas de datos.</li>
+                <li><strong>Brand Management & Creación Ágil de Contenido:</strong> Producción, postproducción y diseño gráfico integral con un fuerte enfoque en formatos verticales (TikTok orgánico). Ejecución del branding corporativo y liderazgo en proyectos de comunicación interna.</li>
+                <li><strong>Gestión de Agencias:</strong> Coordinación y negociación directa con agencias externas, asegurando el cumplimiento de entregables, presupuestos y lineamientos gráficos.</li>
+            </ul>
+            <h4>🏥 ACROMAX</h4>
+            <ul><li><strong>Diseño & Producción Audiovisual:</strong> Desarrollo, diseño gráfico, producción y postproducción de piezas audiovisuales y de comunicación adaptadas a los estándares y requerimientos corporativos del sector.</li></ul>
+        </div>
+    </div>
+
+    <div id="modal-conocimientos" class="modal-overlay" onclick="closeOutside(event, 'modal-conocimientos')">
+        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-conocimientos')">&times;</span>
+            <h3 class="neon-text">💻 Conocimientos y plataformas</h3>
+            <p>🛠️ Stack Tecnológico y Herramientas</p>
+            <h4>🤖 Inteligencia Artificial & Automatización (Top Skill)</h4><div class="tags-list"><span class="tag-item">Gemini</span> <span class="tag-item">Claude Code</span> <span class="tag-item">NotebookLM</span> <span class="tag-item">Krea AI</span> <span class="tag-item">Runway (Video)</span> <span class="tag-item">Magnific AI (Upscaling)</span> <span class="tag-item">ElevenLabs (Audio)</span> <span class="tag-item">n8n</span> <span class="tag-item">Make</span></div>
+            <h4>📈 Performance Digital, Data & CRM</h4><div class="tags-list"><span class="tag-item">Google Ads</span> <span class="tag-item">Meta Business Suite</span> <span class="tag-item">TikTok Ads</span> <span class="tag-item">Google Analytics</span> <span class="tag-item">Power BI</span> <span class="tag-item">HubSpot</span> <span class="tag-item">Growlat</span></div>
+            <h4>🎨 Diseño, Producción Multimedia & Web</h4><div class="tags-list"><span class="tag-item">Premiere Pro</span> <span class="tag-item">After Effects</span> <span class="tag-item">Photoshop</span> <span class="tag-item">Illustrator</span> <span class="tag-item">CapCut</span> <span class="tag-item">HTML</span> <span class="tag-item">CSS</span> <span class="tag-item">JavaScript (Básico)</span></div>
+            <h4>📁 Ofimática & Gestión Corporativa</h4><div class="tags-list"><span class="tag-item">Google Workspace</span> <span class="tag-item">Excel</span> <span class="tag-item">PowerPoint</span> <span class="tag-item">Word</span></div>
+        </div>
+    </div>
+
+    <div id="modal-juegos" class="modal-overlay" onclick="closeOutside(event, 'modal-juegos')">
+        <div class="modal-content modal-text-center"><span class="close-btn" onclick="closeModal('modal-juegos')">&times;</span>
+            <h3 class="neon-text">🎮 Juegos y desarrollos con IA</h3>
+            <p>Selecciona uno de los desarrollos para probarlo en vivo:</p>
+            <div class="modal-buttons-container">
+                <a href="https://desarrollosec.github.io/Crecos_Run/" target="_blank" class="modal-link-btn">🏃‍♂️ Crecos Run</a>
+                <a href="https://desarrollosec.github.io/Sorteador_Tragaperras_Crecos/" target="_blank" class="modal-link-btn">🎰 Sorteador Traga Monedas</a>
+                <a href="https://desarrollosec.github.io/Cup-n_descuento_Mirna/" target="_blank" class="modal-link-btn">🎟️ Cupones Inteligentes</a>
+                <a href="https://desarrollosec.github.io/MinraChristmasplace/" target="_blank" class="modal-link-btn">✉️ Invitación de evento</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Contraseña (Nuevo) -->
+    <div id="modal-password" class="modal-overlay" onclick="closeOutside(event, 'modal-password')">
+        <div class="modal-content modal-text-center" style="max-width: 500px;"><span class="close-btn" onclick="closeModal('modal-password')">&times;</span>
+            <h3 class="neon-text">🔒 Acceso Restringido</h3>
+            <p>Por favor, ingresa la clave para obtener la información:</p>
+            <div style="margin-top: 20px;">
+                <input type="password" id="info-password" class="password-input" placeholder="Tu clave aquí..." onkeypress="handleEnter(event)">
+            </div>
+            <p id="password-error" style="color: #ff3333; display: none; margin-top: 0; margin-bottom: 20px; font-weight: bold;">Clave incorrecta. Intenta nuevamente.</p>
+            <div class="modal-buttons-container" style="margin-top: 0;">
+                <button onclick="checkPassword()" class="modal-link-btn" style="border: none;">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // ======= LÓGICA DEL CUBO 3D DE FONDO =======
+        const bgCube = document.getElementById('bgCube');
+        window.addEventListener('scroll', () => {
+            // El cubo rotará en función a la cantidad de píxeles que bajes
+            let scrollY = window.scrollY;
+            bgCube.style.transform = `rotateX(${scrollY * 0.1 + 45}deg) rotateY(${scrollY * 0.15 + 45}deg) rotateZ(${scrollY * 0.05}deg)`;
+        });
+        // ===========================================
+
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow", grabCursor: true, centeredSlides: true, slidesPerView: "auto", loop: true, speed: 600, 
+            autoplay: { delay: 2500, disableOnInteraction: false, },
+            coverflowEffect: { rotate: 0, stretch: 0, depth: 250, modifier: 1.5, slideShadows: false, },
+        });
+
+        swiper.on('touchStart', function () { swiper.autoplay.stop(); });
+        swiper.on('touchEnd', function () { swiper.autoplay.start(); });
+
+        function openModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
+        function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+        function closeOutside(event, modalId) { if (event.target.id === modalId) { closeModal(modalId); } }
+
+        // ================= LÓGICA DE CONTRASEÑA (NUEVO) ================= //
+        function openPasswordModal() {
+            document.getElementById('info-password').value = ''; 
+            document.getElementById('password-error').style.display = 'none'; 
+            openModal('modal-password');
+        }
+
+        function checkPassword() {
+            const pwdInput = document.getElementById('info-password').value;
+            if (pwdInput === 'carlos2000') {
+                window.open('https://drive.google.com/drive/folders/1li_BXfoHTk0uPOhYdtXFoLEIzNQbaSh-?usp=sharing', '_blank');
+                closeModal('modal-password');
+            } else {
+                document.getElementById('password-error').style.display = 'block';
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                checkPassword();
+            }
+        }
+        // ================================================================ //
+
+        const track = document.getElementById('track');
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById('nextBtn');
+        const prevButton = document.getElementById('prevBtn');
+        let currentIndex = 0;
+        let autoPlayInterval;
+
+        function updateCarousel() {
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        }
+
+        function moveToNextSlide() {
+            if (currentIndex < slides.length - 1) { currentIndex++; } else { currentIndex = 0; }
+            updateCarousel();
+        }
+
+        function moveToPrevSlide() {
+            if (currentIndex > 0) { currentIndex--; } else { currentIndex = slides.length - 1; }
+            updateCarousel();
+        }
+
+        nextButton.addEventListener('click', moveToNextSlide);
+        prevButton.addEventListener('click', moveToPrevSlide);
+        window.addEventListener('resize', updateCarousel);
+
+        function startAutoPlay() { autoPlayInterval = setInterval(moveToNextSlide, 3500); }
+        function stopAutoPlay() { clearInterval(autoPlayInterval); }
+
+        startAutoPlay();
+
+        const carouselContainer = document.querySelector('.portfolio-carousel-container');
+        carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+        carouselContainer.addEventListener('mouseleave', startAutoPlay);
+        carouselContainer.addEventListener('touchstart', stopAutoPlay);
+        carouselContainer.addEventListener('touchend', startAutoPlay);
+    </script>
+</body>
+</html>
