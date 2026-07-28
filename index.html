@@ -33,13 +33,13 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            pointer-events: none; /* Para que no interfiera con los clicks */
+            pointer-events: none;
             display: flex;
             justify-content: center;
             align-items: center;
             perspective: 1200px;
-            filter: blur(10px); /* Desenfocado */
-            opacity: 0.15; /* Transparencia */
+            filter: blur(10px);
+            opacity: 0.15;
         }
 
         .bg-cube {
@@ -47,8 +47,8 @@
             width: 500px;
             height: 500px;
             transform-style: preserve-3d;
-            transform: rotateX(45deg) rotateY(45deg); /* Posición inicial */
-            transition: transform 0.1s linear; /* Suaviza el movimiento al scrollear */
+            transform: rotateX(45deg) rotateY(45deg);
+            transition: transform 0.1s linear;
         }
 
         .cube-face {
@@ -66,8 +66,8 @@
         .face-right  { transform: rotateY(90deg) translateZ(250px); }
         .face-top    { transform: rotateX(90deg) translateZ(250px); }
         .face-bottom { transform: rotateX(-90deg) translateZ(250px); }
-        /* ======================================================== */
 
+        /* ================= TEXTOS Y CONTENEDORES ================= */
         h1, h2, h3, h4 {
             font-family: 'Teko', sans-serif;
             text-transform: uppercase;
@@ -133,7 +133,6 @@
         .skill-3 { top: 45%; left: 0%; animation: floatC 5s ease-in-out infinite; z-index: 2; }
         .skill-5 { bottom: 25%; left: 5%; animation: floatE 8s ease-in-out infinite; }
         .skill-7 { bottom: 5%; left: 18%; animation: floatB 7.5s ease-in-out infinite; }
-        
         .skill-8 { top: 10%; right: 15%; animation: floatE 6.2s ease-in-out infinite; }
         .skill-2 { top: 35%; right: 2%; animation: floatB 7.5s ease-in-out infinite; }
         .skill-4 { top: 55%; right: 0%; animation: floatD 6.5s ease-in-out infinite; }
@@ -150,7 +149,6 @@
             .skill-4 { top: 50%; right: -5%; } .skill-6 { bottom: 25%; right: 2%; }
             .skill-9 { bottom: 5%; right: 10%; }
             
-            /* Ajustar tamaño del cubo en móviles para que no se vea gigante */
             .bg-cube { width: 300px; height: 300px; }
             .face-front  { transform: translateZ(150px); }
             .face-back   { transform: rotateY(180deg) translateZ(150px); }
@@ -227,37 +225,17 @@
 
         .section-title { font-size: 3.5rem; text-align: center; margin-bottom: 40px; margin-top: 0px; }
 
-        .portfolio-section-layout { 
-            display: flex; 
-            align-items: center; 
-            gap: 40px; 
-            max-width: 1100px; 
-            margin: 0 auto; 
-        }
+        .portfolio-section-layout { display: flex; align-items: center; gap: 40px; max-width: 1100px; margin: 0 auto; }
+        .portfolio-carousel-wrapper { flex: 2; max-width: 750px; }
         
-        .portfolio-carousel-wrapper { 
-            flex: 2; 
-            max-width: 750px; 
-        }
-        
-        .portfolio-buttons-wrapper { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-            min-width: 320px; 
-        }
+        .portfolio-buttons-wrapper { flex: 1; display: flex; flex-direction: column; gap: 12px; min-width: 220px; }
 
         .portfolio-carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 15px; }
         .portfolio-track { display: flex; transition: transform 0.5s ease-in-out; }
         .portfolio-slide { min-width: 100%; box-sizing: border-box; padding: 10px; }
 
         .portfolio-slide img, .portfolio-slide video {
-            width: 100%; 
-            height: 550px; 
-            object-fit: cover; 
-            border-radius: 10px; 
-            display: block; 
+            width: 100%; height: 550px; object-fit: cover; border-radius: 10px; display: block; 
         }
 
         .portfolio-btn {
@@ -271,11 +249,11 @@
         .prev-btn { left: 15px; } .next-btn { right: 15px; }
 
         .portfolio-action-btn {
-            background: var(--dark-card); border: 2px solid rgba(255, 85, 0, 0.4); color: #fff; padding: 20px;
-            border-radius: 15px; font-family: 'Teko', sans-serif; font-size: 1.8rem; text-transform: uppercase;
-            text-decoration: none; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease;
+            background: var(--dark-card); border: 2px solid rgba(255, 85, 0, 0.4); color: #fff; 
+            padding: 12px 15px; border-radius: 12px; font-family: 'Teko', sans-serif; 
+            font-size: 1.2rem; text-transform: uppercase; text-decoration: none; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-align: center; display: flex; align-items: center;
-            justify-content: center; gap: 10px; width: 100%; box-sizing: border-box;
+            justify-content: center; gap: 8px; width: 100%; box-sizing: border-box;
         }
 
         .portfolio-action-btn:hover {
@@ -283,7 +261,6 @@
             box-shadow: 0 0 20px var(--neon-orange), inset 0 0 10px rgba(0,0,0,0.2); transform: translateY(-3px);
         }
         
-        /* Estilos para el input de clave */
         .password-input {
             width: 80%; max-width: 300px; padding: 12px; margin-bottom: 20px; font-size: 1.1rem;
             font-family: 'Montserrat', sans-serif; background: #000; color: #fff;
@@ -296,7 +273,6 @@
             .portfolio-section-layout { flex-direction: column; }
             .portfolio-carousel-wrapper { max-width: 100%; }
             .portfolio-buttons-wrapper { width: 100%; min-width: auto; }
-            
             .portfolio-slide img, .portfolio-slide video { height: 400px; }
         }
 
@@ -310,7 +286,79 @@
         .brands-track:hover { animation-play-state: paused; }
         .brand-logo { height: 70px; object-fit: contain; background: #fff; border-radius: 10px; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
         @keyframes scrollBrands { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 20px)); } }
-        .brands-title { white-space: normal; }
+        
+        /* ================= ESTILOS BOATO Y FLUJO ================= */
+        .boato-section { margin-bottom: 30px; }
+        .boato-section h4 { color: #ffd700; font-size: 1.8rem; margin-bottom: 10px; border-left: 4px solid #ffd700; padding-left: 10px; }
+        
+        /* Modal Flujo de Campaña */
+        .modal-flujo-content { width: 100%; max-width: 1000px; max-height: 90vh; }
+        
+        .start-campaign-btn {
+            background: #000; border: 2px solid #ffd700; color: #ffd700; padding: 15px 40px;
+            border-radius: 30px; font-family: 'Teko', sans-serif; font-size: 2rem; cursor: pointer;
+            transition: all 0.3s; display: block; margin: 0 auto 30px; text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        .start-campaign-btn:hover { background: #ffd700; color: #000; box-shadow: 0 0 30px #ffd700; transform: scale(1.05); }
+
+        /* Estructura Gantt/Flujo Vertical */
+        .timeline-container { position: relative; margin: 20px auto; max-width: 900px; padding-left: 40px; padding-bottom: 20px; }
+        
+        .neon-track { position: absolute; top: 0; left: 15px; width: 4px; height: 100%; background: #222; z-index: 1; border-radius: 2px; }
+        
+        .neon-progress { 
+            position: absolute; top: 0; left: 15px; width: 4px; height: 0%; 
+            background: #ffd700; box-shadow: 0 0 15px #ffd700, 0 0 30px #ffd700; 
+            z-index: 2; transition: height 6s linear; border-radius: 2px;
+        }
+        
+        /* Nodos del flujo interactivos */
+        .flow-phase { 
+            position: relative; padding: 25px; margin-bottom: 30px; 
+            background: rgba(20, 20, 20, 0.8); border: 1px solid #333; border-radius: 12px; 
+            z-index: 3; transition: all 0.6s ease; opacity: 0.3; transform: translateX(-15px);
+            cursor: pointer; /* Hace que se vea cliqueable */
+        }
+        .flow-phase::before { 
+            content: ''; position: absolute; top: 30px; left: -36px; width: 18px; height: 18px; 
+            border-radius: 50%; background: #111; border: 3px solid #444; z-index: 4; transition: all 0.6s ease;
+        }
+        
+        .flow-phase.lit-up { 
+            opacity: 1; border-color: rgba(255, 215, 0, 0.3); 
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1), inset 0 0 20px rgba(0,0,0,0.8); 
+            transform: translateX(0); 
+        }
+        .flow-phase.lit-up:hover {
+            border-color: rgba(255, 215, 0, 0.7);
+            background: rgba(30, 30, 30, 0.9);
+        }
+        .flow-phase.lit-up::before { 
+            background: #000; border-color: #ffd700; box-shadow: 0 0 20px #ffd700; 
+        }
+
+        /* Estilos Acordeón */
+        .phase-header { display: flex; justify-content: space-between; align-items: center; }
+        .phase-title-container { flex: 1; }
+        .phase-title { font-family: 'Teko', sans-serif; font-size: 2.2rem; color: #ffd700; margin-bottom: 5px; letter-spacing: 1px; line-height: 1; }
+        .phase-subtitle { font-size: 1rem; color: #aaa; margin-bottom: 0; font-style: italic; }
+        
+        .toggle-icon { font-size: 1.2rem; color: #ffd700; transition: transform 0.4s ease; margin-left: 15px; }
+        .toggle-icon.rotated { transform: rotate(180deg); }
+
+        .phase-content { 
+            max-height: 0; overflow: hidden; opacity: 0; 
+            transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.3s ease; 
+        }
+        .phase-content.open { 
+            max-height: 600px; opacity: 1; margin-top: 20px; 
+            border-top: 1px solid rgba(255, 215, 0, 0.2); padding-top: 15px;
+        }
+        
+        .phase-content ul { padding-left: 20px; margin: 0; color: #ddd; }
+        .phase-content li { margin-bottom: 12px; line-height: 1.5; font-size: 1rem; }
+        .phase-content strong { color: #fff; }
     </style>
 </head>
 <body>
@@ -389,8 +437,9 @@
                 <div class="portfolio-action-btn" onclick="openModal('modal-juegos')">🤖 Juegos y desarrollos con IA</div>
                 <a href="https://canva.link/dzi0kqqhcwa9onq" target="_blank" class="portfolio-action-btn">🎬 Contenido Audiovisual</a>
                 
-                <!-- Nuevos Botones -->
-                <div class="portfolio-action-btn" onclick="openPasswordModal()">🔐 Obtener información</div>
+                <div class="portfolio-action-btn" style="border-color: #ffd700; color: #ffd700;" onclick="openBoatoPasswordModal()">💍 Proyecto Boato</div>
+
+                <div class="portfolio-action-btn" onclick="openInfoPasswordModal()">🔐 Obtener información</div>
                 <a href="./Imgs/CV_Carlos_Balseca.pdf" download="CV_Carlos_Balseca.pdf" class="portfolio-action-btn">📄 Descargar CV</a>
             </div>
 
@@ -406,98 +455,145 @@
 
     </div>
 
-    <!-- Modals -->
-    <div id="modal-perfil" class="modal-overlay" onclick="closeOutside(event, 'modal-perfil')">
-        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-perfil')">&times;</span>
-            <h3 class="neon-text">🚀 Mi Perfil</h3>
-            <div class="profile-modal-content">
-                <div class="profile-modal-text">
-                    <p>Creo firmemente que el buen marketing debe ser medible y rentable. Como especialista en marketing digital y omnicanal, transformo objetivos de negocio en estrategias 'phygitales' (pauta digital, automatización, IA y activaciones en punto de venta).</p>
-                    <p>Más allá de la ejecución, mi fortaleza radica en el liderazgo de proyectos end-to-end: orquesto equipos de trabajo, gestiono agencias externas y asigno presupuestos con un enfoque estricto en el ROAS y el cumplimiento de metas económicas.</p>
-                    <p>Construyo campañas que conectan con la audiencia y multiplican la inversión. Si su objetivo es integrar creatividad, rentabilidad y liderazgo estratégico, mi perfil y su visión hacen el match perfecto.</p>
-                </div>
-                <div class="profile-modal-img-container"><img src="./Imgs/foto_perfil_popup.jpg" alt="Carlos Balseca Perfil" class="profile-modal-img"></div>
-            </div>
-        </div>
-    </div>
+    <!-- Modals Clásicos -->
+    <div id="modal-perfil" class="modal-overlay" onclick="closeOutside(event, 'modal-perfil')"><div class="modal-content"><span class="close-btn" onclick="closeModal('modal-perfil')">&times;</span><h3 class="neon-text">🚀 Mi Perfil</h3><div class="profile-modal-content"><div class="profile-modal-text"><p>Creo firmemente que el buen marketing debe ser medible y rentable. Como especialista en marketing digital y omnicanal, transformo objetivos de negocio en estrategias 'phygitales' (pauta digital, automatización, IA y activaciones en punto de venta).</p><p>Más allá de la ejecución, mi fortaleza radica en el liderazgo de proyectos end-to-end: orquesto equipos de trabajo, gestiono agencias externas y asigno presupuestos con un enfoque estricto en el ROAS y el cumplimiento de metas económicas.</p><p>Construyo campañas que conectan con la audiencia y multiplican la inversión. Si su objetivo es integrar creatividad, rentabilidad y liderazgo estratégico, mi perfil y su visión hacen el match perfecto.</p></div><div class="profile-modal-img-container"><img src="./Imgs/foto_perfil_popup.jpg" alt="Carlos Balseca Perfil" class="profile-modal-img"></div></div></div></div>
+    <div id="modal-habilidades" class="modal-overlay" onclick="closeOutside(event, 'modal-habilidades')"><div class="modal-content"><span class="close-btn" onclick="closeModal('modal-habilidades')">&times;</span><h3 class="neon-text">⚡ Habilidades</h3><h4>🎯 Performance & Estrategia Digital</h4><p>Gestión avanzada de pauta en Meta Ads, Google Ads y TikTok Ads. Diseño de embudos de conversión (funnels), administración de comunidades y comunicación orgánica orientada a resultados.</p><h4>📊 Data, Analytics & Business Intelligence</h4><p>Dominio de Power BI, Google Analytics, Meta Business Suite y manejo de bases de datos. Construcción de dashboards interactivos y reporterías automatizadas para el monitoreo de KPIs, control de presupuestos y toma de decisiones estratégicas.</p><h4>⚙️ Automatización & Ecosistemas CRM</h4><p>Implementación de flujos técnicos para gestión de leads, integraciones multiplataforma y desarrollo de chatbots (tradicionales y con IA) para optimizar la atención y el flujo de ventas.</p><h4>🧠 Inteligencia Artificial Aplicada</h4><p>Implementación de IA en procesos creativos y analíticos, incluyendo análisis predictivo de datos y generación de contenido multimedia (texto, audio y elementos visuales/videojuegos).</p><h4>🎬 Dirección Creativa & Producción Audiovisual</h4><p>Creación de contenido omnicanal, fotografía de campo y dirección de campañas de video comercial. Dominio avanzado de la Suite Adobe (Photoshop, Illustrator, Premiere, After Effects, Audition), DaVinci Resolve, OBS, Canva y CapCut.</p></div></div>
+    <div id="modal-experiencia" class="modal-overlay" onclick="closeOutside(event, 'modal-experiencia')"><div class="modal-content"><span class="close-btn" onclick="closeModal('modal-experiencia')">&times;</span><h3 class="neon-text">💼 Experiencia</h3><h4>📺 ALMACENES MIRNA | Especialista Digital | Junio 2026 – Presente</h4><ul><li><strong>Data Analytics & Performance Digital:</strong> Análisis profundo de información comercial y métricas de negocio para la toma de decisiones estratégicas. Gestión integral de pauta digital orientada a la maximización del ROAS.</li><li><strong>Fidelización & Marketing Conversacional (IA):</strong> Integración de IA para WhatsApp Business y chatbots predictivos.</li><li><strong>Dirección Estratégica de Agencias:</strong> Coordinación de agencias de marketing externas.</li></ul><h4>💊 FARMACORP</h4><ul><li><strong>Business Intelligence:</strong> Desarrollo de tableros (Power BI) y automatización de reporterías.</li><li><strong>Proyectos Corporativos:</strong> Dirección del proyecto "Farmy".</li></ul><h4>🛒 CRESA</h4><ul><li><strong>Dirección Creativa:</strong> Diseño gráfico, producción y postproducción audiovisual.</li><li><strong>Innovación Tecnológica:</strong> Implementación pionera de IA para automatización de procesos internos.</li></ul></div></div>
+    <div id="modal-conocimientos" class="modal-overlay" onclick="closeOutside(event, 'modal-conocimientos')"><div class="modal-content"><span class="close-btn" onclick="closeModal('modal-conocimientos')">&times;</span><h3 class="neon-text">💻 Conocimientos y plataformas</h3><p>🛠️ Stack Tecnológico y Herramientas</p><h4>🤖 Inteligencia Artificial & Automatización (Top Skill)</h4><div class="tags-list"><span class="tag-item">Gemini</span> <span class="tag-item">Claude Code</span> <span class="tag-item">n8n</span> <span class="tag-item">Make</span></div><h4>📈 Performance Digital, Data & CRM</h4><div class="tags-list"><span class="tag-item">Google Ads</span> <span class="tag-item">Meta Business Suite</span> <span class="tag-item">TikTok Ads</span> <span class="tag-item">Power BI</span></div><h4>🎨 Diseño, Producción Multimedia & Web</h4><div class="tags-list"><span class="tag-item">Premiere Pro</span> <span class="tag-item">After Effects</span> <span class="tag-item">Photoshop</span> <span class="tag-item">HTML/CSS/JS</span></div></div></div>
+    <div id="modal-juegos" class="modal-overlay" onclick="closeOutside(event, 'modal-juegos')"><div class="modal-content modal-text-center"><span class="close-btn" onclick="closeModal('modal-juegos')">&times;</span><h3 class="neon-text">🎮 Juegos y desarrollos con IA</h3><p>Selecciona uno de los desarrollos para probarlo en vivo:</p><div class="modal-buttons-container"><a href="https://desarrollosec.github.io/Crecos_Run/" target="_blank" class="modal-link-btn">🏃‍♂️ Crecos Run</a><a href="https://desarrollosec.github.io/Sorteador_Tragaperras_Crecos/" target="_blank" class="modal-link-btn">🎰 Sorteador Traga Monedas</a><a href="https://desarrollosec.github.io/Cup-n_descuento_Mirna/" target="_blank" class="modal-link-btn">🎟️ Cupones Inteligentes</a></div></div></div>
 
-    <div id="modal-habilidades" class="modal-overlay" onclick="closeOutside(event, 'modal-habilidades')">
-        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-habilidades')">&times;</span>
-            <h3 class="neon-text">⚡ Habilidades</h3>
-            <h4>🎯 Performance & Estrategia Digital</h4><p>Gestión avanzada de pauta en Meta Ads, Google Ads y TikTok Ads. Diseño de embudos de conversión (funnels), administración de comunidades y comunicación orgánica orientada a resultados.</p>
-            <h4>📊 Data, Analytics & Business Intelligence</h4><p>Dominio de Power BI, Google Analytics, Meta Business Suite y manejo de bases de datos. Construcción de dashboards interactivos y reporterías automatizadas para el monitoreo de KPIs, control de presupuestos y toma de decisiones estratégicas.</p>
-            <h4>⚙️ Automatización & Ecosistemas CRM</h4><p>Implementación de flujos técnicos para gestión de leads, integraciones multiplataforma y desarrollo de chatbots (tradicionales y con IA) para optimizar la atención y el flujo de ventas.</p>
-            <h4>🧠 Inteligencia Artificial Aplicada</h4><p>Implementación de IA en procesos creativos y analíticos, incluyendo análisis predictivo de datos y generación de contenido multimedia (texto, audio y elementos visuales/videojuegos).</p>
-            <h4>🎬 Dirección Creativa & Producción Audiovisual</h4><p>Creación de contenido omnicanal, fotografía de campo y dirección de campañas de video comercial. Dominio avanzado de la Suite Adobe (Photoshop, Illustrator, Premiere, After Effects, Audition), DaVinci Resolve, OBS, Canva y CapCut.</p>
-        </div>
-    </div>
-
-    <div id="modal-experiencia" class="modal-overlay" onclick="closeOutside(event, 'modal-experiencia')">
-        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-experiencia')">&times;</span>
-            <h3 class="neon-text">💼 Experiencia</h3>
-            <h4>📺 ALMACENES MIRNA | Especialista Digital | Junio 2026 – Presente</h4>
-            <ul>
-                <li><strong>Data Analytics & Performance Digital:</strong> Análisis profundo de información comercial y métricas de negocio para la toma de decisiones estratégicas. Gestión integral de pauta digital orientada a la maximización del ROAS, y liderazgo en el desarrollo de aplicativos digitales corporativos que optimizan los procesos internos.</li>
-                <li><strong>Fidelización & Marketing Conversacional (IA):</strong> Desarrollo e implementación de planes de fidelización para potenciar la retención de clientes (Lifetime Value). Integración de Inteligencia Artificial para WhatsApp Business y chatbots predictivos, ejecutando campañas automatizadas de mailing y mensajería masiva para escalar la atención.</li>
-                <li><strong>Dirección Estratégica de Agencias:</strong> Coordinación y supervisión directa de agencias de marketing externas, asegurando el cumplimiento táctico de las campañas, la optimización de recursos y la alineación total con los objetivos comerciales de la marca.</li>
-            </ul>
-            <h4>💊 FARMACORP</h4>
-            <ul>
-                <li><strong>Business Intelligence & Objetivos Comerciales:</strong> Desarrollo de tableros interactivos (Power BI) y automatización de reporterías corporativas para el monitoreo en tiempo real. Asignación de presupuestos, seguimiento de metas de ventas y evaluación estricta del ROI en campañas comerciales.</li>
-                <li><strong>Gestión de Agencias & Proyectos Corporativos:</strong> Liderazgo en campañas de alto impacto, como la dirección del proyecto comercial multiplataforma del personaje animado 3D "Farmy". Coordinación integral con agencias externas para la producción de materiales, asegurando la conversión directa (mecánicas de registro de facturas en puntos de venta).</li>
-                <li><strong>Administración Digital:</strong> Gestión estratégica de redes sociales y supervisión del ecosistema digital de la marca para mantener la coherencia comunicacional corporativa.</li>
-            </ul>
-            <h4>🛒 CRESA</h4>
-            <ul>
-                <li><strong>Dirección Creativa & Producción Multimedia:</strong> Liderazgo en la dirección de arte corporativa. Ejecución técnica avanzada en diseño gráfico, producción y postproducción audiovisual para campañas de alto impacto.</li>
-                <li><strong>Paid Media & Innovación Tecnológica:</strong> Administración eficiente de presupuestos de pauta digital. Implementación pionera de herramientas de Inteligencia Artificial para automatización de procesos internos, análisis predictivo de mercado y desarrollo de chatbots.</li>
-            </ul>
-            <h4>🩺 VERIS - PARA MÍ</h4>
-            <ul>
-                <li><strong>Performance Marketing & Ecosistema Digital:</strong> Gestión estratégica de pauta en Google Ads, Meta Ads y TikTok Ads enfocada en conversión de leads, respaldada por la administración de CRM y ecosistemas de datos.</li>
-                <li><strong>Brand Management & Creación Ágil de Contenido:</strong> Producción, postproducción y diseño gráfico integral con un fuerte enfoque en formatos verticales (TikTok orgánico). Ejecución del branding corporativo y liderazgo en proyectos de comunicación interna.</li>
-                <li><strong>Gestión de Agencias:</strong> Coordinación y negociación directa con agencias externas, asegurando el cumplimiento de entregables, presupuestos y lineamientos gráficos.</li>
-            </ul>
-            <h4>🏥 ACROMAX</h4>
-            <ul><li><strong>Diseño & Producción Audiovisual:</strong> Desarrollo, diseño gráfico, producción y postproducción de piezas audiovisuales y de comunicación adaptadas a los estándares y requerimientos corporativos del sector.</li></ul>
-        </div>
-    </div>
-
-    <div id="modal-conocimientos" class="modal-overlay" onclick="closeOutside(event, 'modal-conocimientos')">
-        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-conocimientos')">&times;</span>
-            <h3 class="neon-text">💻 Conocimientos y plataformas</h3>
-            <p>🛠️ Stack Tecnológico y Herramientas</p>
-            <h4>🤖 Inteligencia Artificial & Automatización (Top Skill)</h4><div class="tags-list"><span class="tag-item">Gemini</span> <span class="tag-item">Claude Code</span> <span class="tag-item">NotebookLM</span> <span class="tag-item">Krea AI</span> <span class="tag-item">Runway (Video)</span> <span class="tag-item">Magnific AI (Upscaling)</span> <span class="tag-item">ElevenLabs (Audio)</span> <span class="tag-item">n8n</span> <span class="tag-item">Make</span></div>
-            <h4>📈 Performance Digital, Data & CRM</h4><div class="tags-list"><span class="tag-item">Google Ads</span> <span class="tag-item">Meta Business Suite</span> <span class="tag-item">TikTok Ads</span> <span class="tag-item">Google Analytics</span> <span class="tag-item">Power BI</span> <span class="tag-item">HubSpot</span> <span class="tag-item">Growlat</span></div>
-            <h4>🎨 Diseño, Producción Multimedia & Web</h4><div class="tags-list"><span class="tag-item">Premiere Pro</span> <span class="tag-item">After Effects</span> <span class="tag-item">Photoshop</span> <span class="tag-item">Illustrator</span> <span class="tag-item">CapCut</span> <span class="tag-item">HTML</span> <span class="tag-item">CSS</span> <span class="tag-item">JavaScript (Básico)</span></div>
-            <h4>📁 Ofimática & Gestión Corporativa</h4><div class="tags-list"><span class="tag-item">Google Workspace</span> <span class="tag-item">Excel</span> <span class="tag-item">PowerPoint</span> <span class="tag-item">Word</span></div>
-        </div>
-    </div>
-
-    <div id="modal-juegos" class="modal-overlay" onclick="closeOutside(event, 'modal-juegos')">
-        <div class="modal-content modal-text-center"><span class="close-btn" onclick="closeModal('modal-juegos')">&times;</span>
-            <h3 class="neon-text">🎮 Juegos y desarrollos con IA</h3>
-            <p>Selecciona uno de los desarrollos para probarlo en vivo:</p>
-            <div class="modal-buttons-container">
-                <a href="https://desarrollosec.github.io/Crecos_Run/" target="_blank" class="modal-link-btn">🏃‍♂️ Crecos Run</a>
-                <a href="https://desarrollosec.github.io/Sorteador_Tragaperras_Crecos/" target="_blank" class="modal-link-btn">🎰 Sorteador Traga Monedas</a>
-                <a href="https://desarrollosec.github.io/Cup-n_descuento_Mirna/" target="_blank" class="modal-link-btn">🎟️ Cupones Inteligentes</a>
-                <a href="https://desarrollosec.github.io/MinraChristmasplace/" target="_blank" class="modal-link-btn">✉️ Invitación de evento</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Contraseña (Nuevo) -->
-    <div id="modal-password" class="modal-overlay" onclick="closeOutside(event, 'modal-password')">
-        <div class="modal-content modal-text-center" style="max-width: 500px;"><span class="close-btn" onclick="closeModal('modal-password')">&times;</span>
+    <!-- Modales de Contraseñas -->
+    <div id="modal-password-info" class="modal-overlay" onclick="closeOutside(event, 'modal-password-info')">
+        <div class="modal-content modal-text-center" style="max-width: 500px;"><span class="close-btn" onclick="closeModal('modal-password-info')">&times;</span>
             <h3 class="neon-text">🔒 Acceso Restringido</h3>
             <p>Por favor, ingresa la clave para obtener la información:</p>
             <div style="margin-top: 20px;">
-                <input type="password" id="info-password" class="password-input" placeholder="Tu clave aquí..." onkeypress="handleEnter(event)">
+                <input type="password" id="info-password" class="password-input" placeholder="Tu clave aquí..." onkeypress="handleEnterInfo(event)">
             </div>
-            <p id="password-error" style="color: #ff3333; display: none; margin-top: 0; margin-bottom: 20px; font-weight: bold;">Clave incorrecta. Intenta nuevamente.</p>
-            <div class="modal-buttons-container" style="margin-top: 0;">
-                <button onclick="checkPassword()" class="modal-link-btn" style="border: none;">Aceptar</button>
+            <p id="password-error-info" style="color: #ff3333; display: none; margin-top: 0; margin-bottom: 20px; font-weight: bold;">Clave incorrecta. Intenta nuevamente.</p>
+            <div class="modal-buttons-container" style="margin-top: 0;"><button onclick="checkInfoPassword()" class="modal-link-btn" style="border: none;">Aceptar</button></div>
+        </div>
+    </div>
+
+    <div id="modal-password-boato" class="modal-overlay" onclick="closeOutside(event, 'modal-password-boato')">
+        <div class="modal-content modal-text-center" style="max-width: 500px; border-color: #ffd700;"><span class="close-btn" onclick="closeModal('modal-password-boato')">&times;</span>
+            <h3 class="neon-text" style="color: #ffd700;">💍 Proyecto Boato</h3>
+            <p>Por favor, ingresa la clave de acceso:</p>
+            <div style="margin-top: 20px;">
+                <input type="password" id="boato-password" class="password-input" style="border-color: #ffd700;" placeholder="Tu clave aquí..." onkeypress="handleEnterBoato(event)">
+            </div>
+            <p id="password-error-boato" style="color: #ff3333; display: none; margin-top: 0; margin-bottom: 20px; font-weight: bold;">Clave incorrecta. Intenta nuevamente.</p>
+            <div class="modal-buttons-container" style="margin-top: 0;"><button onclick="checkBoatoPassword()" class="modal-link-btn" style="background: #000; border-color: #ffd700; color: #ffd700;">Ingresar</button></div>
+        </div>
+    </div>
+
+    <!-- MODAL BOATO -->
+    <div id="modal-boato" class="modal-overlay" onclick="closeOutside(event, 'modal-boato')">
+        <div class="modal-content"><span class="close-btn" onclick="closeModal('modal-boato')">&times;</span>
+            <h3 class="neon-text" style="color: #ffd700; border-bottom-color: rgba(255, 215, 0, 0.3);">💎 Perfil y Propuesta: BOATO</h3>
+            <div class="boato-section">
+                <h4>1. ¿Quién soy?</h4>
+                <p>Soy Carlos Balseca, un especialista en marketing digital apasionado por transformar datos en rentabilidad. He forjado mi trayectoria en empresas como Almacenes Mirna, Cresa y Farmcorp.</p>
+                <p><strong>Mis fortalezas:</strong> La capacidad de orquestar estrategias integrales. Mi gran diferenciador es que puenteo la brecha entre la creatividad (diseño y audiovisual) y la analítica dura (Power BI, ROAS). En cuanto a Shopify, tengo un nivel sólido y altamente adaptable; gracias a mi background construyendo integraciones web y flujos con n8n, puedo optimizar la tienda para maximizar la tasa de conversión.</p>
+            </div>
+            <div class="boato-section">
+                <h4>2. ¿Por qué BOATO?</h4>
+                <p>A nivel personal, tengo una fuerte preferencia por la estética limpia, fina y minimalista; me atraen los diseños que no necesitan ser recargados para transmitir valor y elegancia. Esa es la percepción que tengo de BOATO. Me llama profundamente la atención el potencial de escalar una marca con una identidad visual tan pulida hacia un ecosistema digital que convierta predeciblemente.</p>
+            </div>
+            <div class="boato-section">
+                <h4>3. ¿Qué aportaría al cargo?</h4>
+                <p>Aporto un ecosistema completo: automatización (IA y flujos conversacionales), gestión precisa de Meta Ads/Google Ads, y reportería en tiempo real. Desde el día uno, asumo con total confianza la optimización del presupuesto publicitario y la orquestación del CRM. Trabajo en equipo de manera sinérgica; estoy acostumbrado a liderar y coordinar con agencias, creativos y áreas comerciales para que todos rememos hacia el mismo KPI.</p>
+            </div>
+            <div class="modal-buttons-container">
+                <button class="modal-link-btn" style="border-color: #ffd700; color: #ffd700; background: #111;" onclick="abrirFlujoCampana()">🚀 Ver desarrollo de campaña</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NUEVO MODAL: FLUJO DE CAMPAÑA (GANTT DINÁMICO ACORDEÓN) -->
+    <div id="modal-flujo-campana" class="modal-overlay" onclick="closeOutside(event, 'modal-flujo-campana')">
+        <div class="modal-content modal-flujo-content"><span class="close-btn" onclick="closeModal('modal-flujo-campana')">&times;</span>
+            <h3 class="neon-text" style="color: #ffd700; text-align: center; border: none;">💎 Masterplan: "El Origen del Lujo"</h3>
+            <p style="text-align: center; margin-bottom: 40px;">Diagrama de flujo operativo y estratégico omnicanal.</p>
+            
+            <button id="btn-iniciar-campana" class="start-campaign-btn" onclick="iniciarAnimacionFlujo()">⚡ Iniciar Campaña</button>
+
+            <div class="timeline-container">
+                <div class="neon-track"></div>
+                <div id="neon-progress-line" class="neon-progress"></div>
+
+                <!-- Fase 1 -->
+                <div class="flow-phase" id="phase-1" onclick="toggleAccordion('content-1', 'icon-1')">
+                    <div class="phase-header">
+                        <div class="phase-title-container">
+                            <div class="phase-title">FASE 1: Atracción y Reposicionamiento</div>
+                            <div class="phase-subtitle">Awareness & Contenido de Alto Valor</div>
+                        </div>
+                        <div class="toggle-icon" id="icon-1">▼</div>
+                    </div>
+                    <div class="phase-content" id="content-1">
+                        <ul>
+                            <li><strong>Rebranding UX/UI (Shopify):</strong> Evolución hacia una estética hiper-minimalista y elegante.</li>
+                            <li><strong>Storytelling de Origen:</strong> Campaña audiovisual destacando a los artesanos hindúes y la autenticidad.</li>
+                            <li><strong>Marketing de Influencia (KOLs):</strong> Perfiles top tier mostrando las piezas en contextos sofisticados.</li>
+                            <li><strong>Pauta Digital:</strong> Despliegue en Meta Ads segmentado por estilo de vida e ingresos.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Fase 2 -->
+                <div class="flow-phase" id="phase-2" onclick="toggleAccordion('content-2', 'icon-2')">
+                    <div class="phase-header">
+                        <div class="phase-title-container">
+                            <div class="phase-title">FASE 2: Interacción y Experiencia</div>
+                            <div class="phase-subtitle">Middle of Funnel (Conversión de Tráfico Frío)</div>
+                        </div>
+                        <div class="toggle-icon" id="icon-2">▼</div>
+                    </div>
+                    <div class="phase-content" id="content-2">
+                        <ul>
+                            <li><strong>Quiz Interactivo "Tu Aura BOATO":</strong> Formulario en web para descubrir qué piedra/pulsera hace "match" con el cliente.</li>
+                            <li><strong>Filtro de Realidad Aumentada (AR):</strong> Prueba virtual de joyas en Instagram y TikTok para visualización hiperrealista.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Fase 3 -->
+                <div class="flow-phase" id="phase-3" onclick="toggleAccordion('content-3', 'icon-3')">
+                    <div class="phase-header">
+                        <div class="phase-title-container">
+                            <div class="phase-title">FASE 3: Automatización y Cierre</div>
+                            <div class="phase-subtitle">Bottom of Funnel (n8n + IA)</div>
+                        </div>
+                        <div class="toggle-icon" id="icon-3">▼</div>
+                    </div>
+                    <div class="phase-content" id="content-3">
+                        <ul>
+                            <li><strong>Ecosistema CRM Inteligente:</strong> Embudos personalizados según las respuestas obtenidas en el Quiz interactivo.</li>
+                            <li><strong>Recuperación de Carritos (WhatsApp IA):</strong> Bot conversacional ofreciendo tips de cuidado y asistencia humana para la pieza abandonada.</li>
+                            <li><strong>Minería de Datos y Reactivación:</strong> Campañas automáticas (Power BI) para clientes inactivos basadas en sus históricos de compra.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Fase 4 -->
+                <div class="flow-phase" id="phase-4" onclick="toggleAccordion('content-4', 'icon-4')">
+                    <div class="phase-header">
+                        <div class="phase-title-container">
+                            <div class="phase-title">FASE 4: Experiencia "Phygital"</div>
+                            <div class="phase-subtitle">Loyalty (Retención) & Acquisition (Captación)</div>
+                        </div>
+                        <div class="toggle-icon" id="icon-4">▼</div>
+                    </div>
+                    <div class="phase-content" id="content-4">
+                        <ul>
+                            <li><strong>Activación VIP (Retención):</strong> Brunch exclusivo en locaciones premium para el Top 20% de clientes. Historia de las piedras y armado personalizado.</li>
+                            <li><strong>"The BOATO Experience" (Captación):</strong> Pop-up en centros comerciales top. Prospectos captados online asisten para una asesoría de estilo táctil.</li>
+                            <li><strong>Sincronización O2O:</strong> Escaneo de código QR físico que detona automatizaciones en el CRM (descuentos, encuestas, acceso anticipado).</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -507,49 +603,105 @@
         // ======= LÓGICA DEL CUBO 3D DE FONDO =======
         const bgCube = document.getElementById('bgCube');
         window.addEventListener('scroll', () => {
-            // El cubo rotará en función a la cantidad de píxeles que bajes
             let scrollY = window.scrollY;
             bgCube.style.transform = `rotateX(${scrollY * 0.1 + 45}deg) rotateY(${scrollY * 0.15 + 45}deg) rotateZ(${scrollY * 0.05}deg)`;
         });
-        // ===========================================
 
+        // ======= SWIPER =======
         var swiper = new Swiper(".mySwiper", {
             effect: "coverflow", grabCursor: true, centeredSlides: true, slidesPerView: "auto", loop: true, speed: 600, 
             autoplay: { delay: 2500, disableOnInteraction: false, },
             coverflowEffect: { rotate: 0, stretch: 0, depth: 250, modifier: 1.5, slideShadows: false, },
         });
-
         swiper.on('touchStart', function () { swiper.autoplay.stop(); });
         swiper.on('touchEnd', function () { swiper.autoplay.start(); });
 
+        // ======= MANEJO DE MODALES =======
         function openModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
         function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
         function closeOutside(event, modalId) { if (event.target.id === modalId) { closeModal(modalId); } }
 
-        // ================= LÓGICA DE CONTRASEÑA (NUEVO) ================= //
-        function openPasswordModal() {
+        // ======= CONTRASEÑAS =======
+        function openInfoPasswordModal() {
             document.getElementById('info-password').value = ''; 
-            document.getElementById('password-error').style.display = 'none'; 
-            openModal('modal-password');
+            document.getElementById('password-error-info').style.display = 'none'; 
+            openModal('modal-password-info');
         }
-
-        function checkPassword() {
+        function checkInfoPassword() {
             const pwdInput = document.getElementById('info-password').value;
             if (pwdInput === 'carlos2000') {
                 window.open('https://drive.google.com/drive/folders/1li_BXfoHTk0uPOhYdtXFoLEIzNQbaSh-?usp=sharing', '_blank');
-                closeModal('modal-password');
+                closeModal('modal-password-info');
+            } else { document.getElementById('password-error-info').style.display = 'block'; }
+        }
+        function handleEnterInfo(event) { if (event.key === 'Enter') checkInfoPassword(); }
+
+        function openBoatoPasswordModal() {
+            document.getElementById('boato-password').value = ''; 
+            document.getElementById('password-error-boato').style.display = 'none'; 
+            openModal('modal-password-boato');
+        }
+        function checkBoatoPassword() {
+            const pwdInput = document.getElementById('boato-password').value;
+            if (pwdInput === '2000') {
+                closeModal('modal-password-boato');
+                openModal('modal-boato');
+            } else { document.getElementById('password-error-boato').style.display = 'block'; }
+        }
+        function handleEnterBoato(event) { if (event.key === 'Enter') checkBoatoPassword(); }
+
+        // ======= FLUJO DE CAMPAÑA (GANTT DINÁMICO) =======
+        function abrirFlujoCampana() {
+            closeModal('modal-boato');
+            openModal('modal-flujo-campana');
+            
+            // Reiniciar estado
+            document.getElementById('btn-iniciar-campana').style.display = 'block';
+            document.getElementById('neon-progress-line').style.height = '0%';
+            const phases = document.querySelectorAll('.flow-phase');
+            phases.forEach(p => p.classList.remove('lit-up'));
+            
+            // Cerrar todos los acordeones al reiniciar
+            document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('open'));
+            document.querySelectorAll('.toggle-icon').forEach(i => i.classList.remove('rotated'));
+        }
+
+        function iniciarAnimacionFlujo() {
+            document.getElementById('btn-iniciar-campana').style.display = 'none';
+            document.getElementById('neon-progress-line').style.height = '100%';
+            
+            const phases = [
+                document.getElementById('phase-1'),
+                document.getElementById('phase-2'),
+                document.getElementById('phase-3'),
+                document.getElementById('phase-4')
+            ];
+            
+            setTimeout(() => phases[0].classList.add('lit-up'), 600);
+            setTimeout(() => phases[1].classList.add('lit-up'), 2200);
+            setTimeout(() => phases[2].classList.add('lit-up'), 3800);
+            setTimeout(() => phases[3].classList.add('lit-up'), 5500);
+        }
+
+        // ======= LÓGICA ACORDEÓN =======
+        function toggleAccordion(contentId, iconId) {
+            // Solo permite abrir si la tarjeta ya está iluminada por la línea de tiempo
+            const parentPhase = document.getElementById(contentId).closest('.flow-phase');
+            if (!parentPhase.classList.contains('lit-up')) return; 
+
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.classList.remove('rotated');
             } else {
-                document.getElementById('password-error').style.display = 'block';
+                content.classList.add('open');
+                icon.classList.add('rotated');
             }
         }
 
-        function handleEnter(event) {
-            if (event.key === 'Enter') {
-                checkPassword();
-            }
-        }
-        // ================================================================ //
-
+        // ======= CARRUSEL =======
         const track = document.getElementById('track');
         const slides = Array.from(track.children);
         const nextButton = document.getElementById('nextBtn');
@@ -561,12 +713,10 @@
             const slideWidth = slides[0].getBoundingClientRect().width;
             track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
         }
-
         function moveToNextSlide() {
             if (currentIndex < slides.length - 1) { currentIndex++; } else { currentIndex = 0; }
             updateCarousel();
         }
-
         function moveToPrevSlide() {
             if (currentIndex > 0) { currentIndex--; } else { currentIndex = slides.length - 1; }
             updateCarousel();
